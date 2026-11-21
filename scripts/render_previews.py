@@ -15,6 +15,7 @@ with TestClient(app) as client:
     pages['reserva']=client.get('/r/studio-aurora').text
     pages['cadastro']=client.get('/signup').text
     login=client.get('/login').text
+    pages['login']=login
     match=re.search(r'<meta name="csrf-token" content="([^"]+)"',login)
     assert match
     result=client.post('/api/auth/login',headers={'X-CSRF-Token':match.group(1)},json={
@@ -50,6 +51,10 @@ with sync_playwright() as pw:
         print(f'{name}: theme={theme}, horizontal_overflow={overflow}, js_errors={errors}')
         page.close()
     shot('landing-claro','landing',full_page=True)
+    shot('login-claro','login')
+    shot('login-escuro','login',theme='dark')
+    shot('cadastro-claro','cadastro')
+    shot('cadastro-escuro','cadastro',theme='dark')
     shot('landing-escuro','landing',theme='dark',full_page=True)
     shot('painel-claro','painel')
     shot('painel-escuro','painel',theme='dark')
