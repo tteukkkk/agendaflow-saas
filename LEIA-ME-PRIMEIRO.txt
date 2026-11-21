@@ -1,0 +1,32 @@
+AGENDAFLOW - PACOTE INDIVIDUAL PARA WINDOWS
+
+1. Extraia todo o ZIP para uma pasta, por exemplo Downloads/AgendaFlow.
+2. Execute ABRIR_AGENDAFLOW.bat.
+3. Na primeira vez o Windows precisa de Python 3.12+ e internet para instalar dependencias.
+4. O navegador abre o login automaticamente, numa porta entre 8030 e 8039.
+   Nunca acesse a aba antiga na porta 8000.
+5. Deixe a janela preta aberta. CTRL+C nessa janela encerra o site.
+
+LOGIN DEMO (somente local, dados ficticios)
+  Email: marina@demo.agendaflow.local
+  Senha: DemoSeguro#2026
+
+CONFERIR IMAGENS SEM ABRIR O SITE
+  Execute VER_PRINTS.bat ou abra GALERIA-PRINTS.html.
+  Marque as fotos preferidas e envie codigos como A01, A05, A08.
+  Depois voce pode navegar no aplicativo e fazer novos prints usando Win+Shift+S.
+
+IMPORTANTE
+- Este ZIP contem apenas AgendaFlow, nao DevFlow/FinTrack.
+- O launcher usa dados separados para evitar conflitos com o banco anterior.
+- O banco de demonstracao nao deve ser usado publicamente.
+- Nao feche a janela de comando enquanto estiver usando o site.
+
+CORRECAO WINDOWS — FUSO HORARIO
+O instalador agora inclui tzdata e verifica America/Sao_Paulo antes de criar a conta demo.
+Se voce ja tem a versao anterior extraida e quer apenas corrigir sem baixar tudo,
+abra CMD na pasta AgendaFlow e execute:
+  \.venv\Scripts\python.exe -m pip install tzdata
+Depois abra ABRIR_AGENDAFLOW.bat novamente.
+
+CORRIGIR_FUSO.bat instala tzdata no ambiente local existente, sem apagar o banco.

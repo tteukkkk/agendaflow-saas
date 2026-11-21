@@ -1,0 +1,12 @@
+fastapi>=0.115,<1
+uvicorn[standard]>=0.30,<1
+SQLAlchemy>=2.0,<3
+pydantic>=2.0,<3
+Jinja2>=3.1,<4
+itsdangerous>=2.2,<3
+python-dotenv>=1.0,<2
+argon2-cffi>=23.1,<26
+httpx>=0.27,<1
+alembic>=1.14,<2
+# Banco de fusos IANA necessario no Windows (ex.: America/Sao_Paulo)
+tzdata>=2024.1

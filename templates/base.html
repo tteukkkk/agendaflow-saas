@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="pt-BR" data-theme="light">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="AgendaFlow — Sua agenda, clientes e operação em um só lugar. Plataforma de agendamentos para profissionais e empresas.">
+<meta name="theme-color" content="#101010"><meta name="csrf-token" content="{{ csrf }}">
+<title>{% block title %}AgendaFlow{% endblock %} · AgendaFlow</title>
+<link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/static/styles.css"><script defer src="/static/app.js"></script>
+</head>
+<body class="{% if org and membership and page is defined %}has-app{% else %}public-page{% endif %}">
+<div class="top-progress" id="top-progress" aria-hidden="true"></div>
+{% if org and membership and page is defined %}
+<div class="application">
+  <aside class="sidebar" id="sidebar">
+    <a class="brand" href="/app/{{ org.slug }}" aria-label="AgendaFlow home"><span class="brand-mark"><span></span><span></span><span></span><span></span></span>agenda<span>flow.</span></a>
+    <div class="org-identity"><div class="org-icon">{{ org.name[:1]|upper }}</div><div class="org-lines"><strong>{{ org.name }}</strong><small>Workspace · {{ subscription.plan|upper }}</small></div><span class="org-dot"></span></div>
+    <p class="nav-eyebrow">ESPAÇO DE TRABALHO</p>
+    <nav class="app-nav" aria-label="Seções do painel">
+    <a href="/app/{{ org.slug }}" class="{% if page=='dashboard' %}on{% endif %}"><span>◫</span> Visão geral</a>
+    <a href="/app/{{ org.slug }}/calendar" class="{% if page=='calendar' %}on{% endif %}"><span>▦</span> Calendário</a>
+    <a href="/app/{{ org.slug }}/appointments" class="{% if page=='appointments' %}on{% endif %}"><span>◷</span> Agendamentos</a>
+    {% if membership.role!='staff' %}
+    <a href="/app/{{ org.slug }}/customers" class="{% if page=='customers' %}on{% endif %}"><span>♧</span> Clientes</a>
+    <a href="/app/{{ org.slug }}/services" class="{% if page=='services' %}on{% endif %}"><span>❖</span> Serviços</a>
+    <a href="/app/{{ org.slug }}/team" class="{% if page=='team' %}on{% endif %}"><span>♙</span> Equipe</a>
+    {% endif %}
+    </nav>
+    <p class="nav-eyebrow second">GESTÃO</p>
+    <nav class="app-nav" aria-label="Gestão">
+    {% if membership.role!='staff' %}<a href="/app/{{ org.slug }}/reports" class="{% if page=='reports' %}on{% endif %}"><span>⌁</span> Relatórios</a>{% endif %}
+    {% if membership.role=='owner' %}
+    <a href="/app/{{ org.slug }}/billing" class="{% if page=='billing' %}on{% endif %}"><span>◇</span> Assinatura</a>
+    <a href="/app/{{ org.slug }}/settings" class="{% if page=='settings' %}on{% endif %}"><span>⚙</span> Configurações</a>
+    {% endif %}
+    </nav>
+    <div class="side-bottom"><div class="side-tip"><span class="sparkle">✦</span><strong>Seu negócio, no controle.</strong><p>Um link para reservas. Mais tempo para o que importa.</p><a href="/r/{{ org.slug }}" target="_blank" rel="noopener">Ver página de reservas ↗</a></div>
+      <div class="profile"><span class="profile-avatar">{{ user.name[:1]|upper }}</span><span><strong>{{ user.name }}</strong><small>{{ membership.role|capitalize }}</small></span><button class="icon-action" data-logout aria-label="Sair" title="Encerrar sessão">⇥</button></div>
+    </div>
+  </aside><div id="mobile-shade" class="mobile-shade" hidden></div>
+  <div class="app-stage"><header class="app-header"><div class="header-left"><button class="icon-action mobile-menu" data-menu aria-label="Abrir menu">☰</button><span class="breadcrumb">Workspace <span>/</span> <strong>{{ page|capitalize }}</strong></span></div><div class="header-right"><span class="current-day">{{ today.strftime('%d/%m/%Y') }}</span><button class="icon-action theme-toggle" data-theme-toggle aria-label="Alternar tema">◐</button><span class="head-avatar">{{ user.name[:1]|upper }}</span></div></header>
+  <main class="app-main" id="main-content">{% block content %}{% endblock %}</main><footer class="app-footer">© 2026 AgendaFlow <span>Menos operação. Mais resultado.</span></footer></div>
+</div>
+{% else %}
+<header class="public-header"><nav class="public-nav container"><a href="/" class="brand"><span class="brand-mark"><span></span><span></span><span></span><span></span></span>agenda<span>flow.</span></a><div class="public-links"><a href="/#recursos">Recursos</a><a href="/#planos">Planos</a><a href="/#como-funciona">Como funciona</a></div><div class="public-cta"><button data-theme-toggle class="icon-action theme-toggle" aria-label="Alternar tema">◐</button>{% if user %}<a href="/api/me" class="nav-text-link">Minha conta</a>{% else %}<a href="/login" class="nav-text-link">Entrar</a>{% endif %}<a href="/signup" class="btn primary btn-small">Começar grátis <span>↗</span></a></div></nav></header>
+<main>{% block public_content %}{% endblock %}</main>
+<footer class="public-footer"><div class="container"><div><span class="brand brand-footer">agenda<span>flow.</span></span><p>Uma nova maneira de cuidar do seu tempo.</p></div><div><a href="/privacy">Privacidade</a><a href="/terms">Termos</a><a href="mailto:{{ support_email }}">Contato</a></div><small>© 2026 AgendaFlow. Todos os direitos reservados.</small></div></footer>
+{% endif %}
+<div id="toast-stack" class="toast-stack" role="status" aria-live="polite"></div>
+</body></html>
