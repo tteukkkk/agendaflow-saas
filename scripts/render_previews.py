@@ -29,7 +29,7 @@ with TestClient(app) as client:
         assert r.status_code==200,(url,r.status_code,r.text[:200])
         pages[slug]=r.text
 with sync_playwright() as pw:
-    browser=pw.chromium.launch(headless=True,executable_path='/usr/bin/chromium',args=['--no-sandbox','--disable-dev-shm-usage'])
+    browser=pw.chromium.launch(headless=True,**({'executable_path':'/usr/bin/chromium'} if Path('/usr/bin/chromium').exists() else {}),args=['--no-sandbox','--disable-dev-shm-usage'])
     def shot(name,key,theme='light',width=1440,height=920,full_page=False):
         raw=pages[key]
         # Inline local SVG for offline capture: browser preview cannot use localhost assets.
@@ -54,11 +54,23 @@ with sync_playwright() as pw:
     shot('painel-claro','painel')
     shot('painel-escuro','painel',theme='dark')
     shot('agenda-claro','agenda')
+    shot('agenda-escuro','agenda',theme='dark')
     shot('servicos-claro','servicos')
+    shot('servicos-escuro','servicos',theme='dark')
+    shot('equipe-claro','equipe')
     shot('equipe-escuro','equipe',theme='dark')
     shot('assinatura-claro','assinatura')
+    shot('assinatura-escuro','assinatura',theme='dark')
+    shot('clientes-claro','clientes')
+    shot('clientes-escuro','clientes',theme='dark')
+    shot('configuracoes-claro','configuracoes')
+    shot('configuracoes-escuro','configuracoes',theme='dark')
     shot('reservar-claro','reserva',full_page=True)
+    shot('reservar-escuro','reserva',theme='dark',full_page=True)
     shot('landing-mobile','landing',width=390,height=844)
+    shot('landing-mobile-escuro','landing',theme='dark',width=390,height=844)
     shot('reserva-mobile','reserva',width=390,height=844)
+    shot('reserva-mobile-escuro','reserva',theme='dark',width=390,height=844)
     shot('painel-mobile','painel',width=390,height=844)
+    shot('painel-mobile-escuro','painel',theme='dark',width=390,height=844)
     browser.close()
