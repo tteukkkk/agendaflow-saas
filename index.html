@@ -1,42 +1,192 @@
 <!doctype html>
-<html lang="pt-BR" data-theme="light"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Demonstração visual do AgendaFlow, projeto de Matheus Macêdo."><title>AgendaFlow | Demonstração visual</title>
-<style>
-:root{color-scheme:light;--bg:#fafbfc;--paper:#fff;--fg:#1a2434;--muted:#657180;--line:#dce3e8;--hero:#e7f2e8;--accent:#366a53;--hero-fg:#152638;--shadow:#131b301a}
-html[data-theme=dark]{color-scheme:dark;--bg:#12151d;--paper:#1b202b;--fg:#f6f7fa;--muted:#b9c1d0;--line:#374253;--hero:#233e32;--accent:#daf3e5;--hero-fg:#f5f7fb;--shadow:#0006}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.6 system-ui,-apple-system,"Segoe UI",sans-serif}button,a{font:inherit}a{text-decoration:none;color:inherit}button{cursor:pointer}img{display:block;max-width:100%}
-:focus-visible{outline:3px solid var(--accent);outline-offset:4px}
-.wrap{width:100%;padding-inline:clamp(18px,3.6vw,76px)}.head{position:sticky;top:0;z-index:10;background:var(--paper);border-bottom:1px solid var(--line)}
-.nav{min-height:76px;display:flex;gap:18px;align-items:center}.logo{font-size:22px;font-weight:900;letter-spacing:-1px}.logo span{color:var(--accent)}.nav-right{margin-left:auto;display:flex;align-items:center;gap:14px}.nav-link{font-size:12px;font-weight:750}.pill{display:inline-flex;align-items:center;justify-content:center;min-height:40px;border:1px solid var(--line);border-radius:100px;padding:9px 17px;font-size:12px;font-weight:800}.theme{border:1px solid var(--line);border-radius:50%;width:40px;height:40px;background:var(--paper);color:var(--fg)}
-.hero{background:var(--hero);color:var(--hero-fg);border-bottom:1px solid var(--line)}.hero-grid{display:grid;grid-template-columns:minmax(0,.83fr) minmax(0,1.17fr);align-items:center;gap:clamp(28px,5vw,100px);padding-block:clamp(56px,7vw,118px)}
-.kicker{font-weight:900;font-size:11px;letter-spacing:2.3px}.hero h1{font-size:clamp(57px,7vw,122px);line-height:1;letter-spacing:-.075em;margin:28px 0 18px}.hero h2{font-size:clamp(19px,2.2vw,31px);line-height:1.3;letter-spacing:-.04em;margin:0 0 16px}.hero p{opacity:.84;max-width:600px;margin:0 0 28px}.cta{display:inline-block;border-radius:9px;padding:14px 22px;background:#161616;color:#fff;font-size:13px;font-weight:800}.hero-visual{border:7px solid var(--paper);background:#fff;border-radius:15px;overflow:hidden;box-shadow:0 22px 55px var(--shadow)}.hero-visual img{width:100%;aspect-ratio:16/10;object-fit:contain}
-.section{padding-block:clamp(65px,6vw,112px)}.section-head{display:flex;justify-content:space-between;align-items:end;gap:24px;margin-bottom:34px}.section-head h2{font-size:clamp(32px,3.7vw,55px);line-height:1.2;letter-spacing:-.055em;margin:0}.section-head p{max-width:340px;font-size:13px;color:var(--muted)}.gallery{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(14px,1.8vw,28px)}
-.card{min-width:0;background:var(--paper);border:1px solid var(--line);border-radius:16px;overflow:hidden}.zoom{display:block;width:100%;border:0;padding:13px;background:var(--line)}.zoom img{width:100%;aspect-ratio:16/10;object-fit:contain;object-position:top center;background:#fff;border-radius:7px;transition:transform .2s}.zoom:hover img{transform:scale(1.03)}.card-info{padding:20px 24px 23px}.count{font-size:11px;color:var(--accent);font-weight:900}.card h3{font-size:22px;letter-spacing:-.04em;line-height:1.25;margin:10px 0}.card p{font-size:13px;color:var(--muted);margin:0}
-.disclaimer{padding-block:43px;background:var(--paper);border-block:1px solid var(--line)}.disclaimer strong{display:block;font-size:22px;letter-spacing:-.04em}.disclaimer p{color:var(--muted);font-size:14px;max-width:880px}.footer{display:flex;justify-content:space-between;gap:18px;padding-block:35px;font-size:12px;color:var(--muted);flex-wrap:wrap}
-dialog{border:0;border-radius:14px;background:var(--paper);color:var(--fg);padding:12px;max-width:95vw;max-height:94dvh;box-shadow:0 28px 95px #0008}dialog::backdrop{background:#000d}dialog img{max-width:100%;max-height:78dvh;object-fit:contain;background:#fff;margin:auto}dialog div{display:flex;justify-content:space-between;align-items:center;gap:15px;padding:10px 3px 2px}dialog button{border-radius:100px;background:var(--paper);color:var(--fg);border:1px solid var(--line);padding:7px 14px}
-@media(max-width:950px){.hero-grid{grid-template-columns:1fr}.gallery{grid-template-columns:repeat(2,minmax(0,1fr))}.hero-visual{max-width:850px}}
-@media(max-width:600px){.nav{flex-wrap:wrap;padding-block:12px}.nav-right{gap:8px}.nav-link{display:none}.pill{padding:8px 12px}.section-head{display:block}.gallery{grid-template-columns:1fr}.hero-grid{padding-block:53px;gap:35px}.hero h1{font-size:clamp(50px,12vw,74px)}.card-info{padding:17px 20px}dialog{padding:8px}}
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.zoom img{transition:none}}
-</style>
-<script>try{document.documentElement.dataset.theme=localStorage.getItem('pages-agendaflow-saas-theme')||'light'}catch(e){document.documentElement.dataset.theme='light'}</script>
-</head><body>
-<header class="head"><div class="wrap nav"><a class="logo" href="#top">AgendaFlow<span>.</span></a><div class="nav-right"><a class="nav-link" href="#telas">Telas</a><a class="nav-link" href="#sobre">Sobre</a><button class="theme" id="theme" type="button" aria-label="Alternar modo claro e escuro">◐</button><a class="pill" target="_blank" rel="noopener noreferrer" href="https://github.com/tteukkkk/agendaflow-saas">Código no GitHub ↗</a></div></div></header>
-<main id="top"><section class="hero"><div class="wrap hero-grid"><div><span class="kicker">PORTFÓLIO · DEMONSTRAÇÃO VISUAL</span><h1>AgendaFlow.</h1><h2>Agendamentos, reservas e equipe em um lugar.</h2><p>Organização de serviços, horários, clientes e atendimentos.</p><a class="cta" href="#telas">Explorar as telas ↘</a></div><div class="hero-visual"><img src="previews/landing-claro.png" data-light="previews/landing-claro.png" data-dark="previews/landing-escuro.png" alt="Página de apresentação do AgendaFlow" width="1440" height="900"></div></div></section>
-<section class="section wrap" id="telas"><div class="section-head"><h2>Explore o AgendaFlow<br>por dentro.</h2><p>Capturas das interfaces, com dados fictícios para apresentação. Clique nas imagens para ampliar.</p></div><div class="gallery"><article class="card"><button class="zoom" aria-label="Ampliar tela de Painel" type="button"><img alt="Painel no AgendaFlow" src="previews/painel-claro.png" data-light="previews/painel-claro.png" data-dark="previews/painel-escuro.png" loading="lazy" width="1280" height="720"></button><div class="card-info"><span class="count">01</span><h3>Painel</h3><p>Explore a interface de Painel.</p></div></article>
-<article class="card"><button class="zoom" aria-label="Ampliar tela de Agenda" type="button"><img alt="Agenda no AgendaFlow" src="previews/agenda-claro.png" data-light="previews/agenda-claro.png" data-dark="previews/agenda-claro.png" loading="lazy" width="1280" height="720"></button><div class="card-info"><span class="count">02</span><h3>Agenda</h3><p>Explore a interface de Agenda.</p></div></article>
-<article class="card"><button class="zoom" aria-label="Ampliar tela de Reservas" type="button"><img alt="Reservas no AgendaFlow" src="previews/reservar-claro.png" data-light="previews/reservar-claro.png" data-dark="previews/reservar-claro.png" loading="lazy" width="1280" height="720"></button><div class="card-info"><span class="count">03</span><h3>Reservas</h3><p>Explore a interface de Reservas.</p></div></article>
-<article class="card"><button class="zoom" aria-label="Ampliar tela de Serviços" type="button"><img alt="Serviços no AgendaFlow" src="previews/servicos-claro.png" data-light="previews/servicos-claro.png" data-dark="previews/servicos-claro.png" loading="lazy" width="1280" height="720"></button><div class="card-info"><span class="count">04</span><h3>Serviços</h3><p>Explore a interface de Serviços.</p></div></article>
-<article class="card"><button class="zoom" aria-label="Ampliar tela de Equipe" type="button"><img alt="Equipe no AgendaFlow" src="previews/equipe-escuro.png" data-light="previews/equipe-escuro.png" data-dark="previews/equipe-escuro.png" loading="lazy" width="1280" height="720"></button><div class="card-info"><span class="count">05</span><h3>Equipe</h3><p>Explore a interface de Equipe.</p></div></article>
-<article class="card"><button class="zoom" aria-label="Ampliar tela de Assinatura" type="button"><img alt="Assinatura no AgendaFlow" src="previews/assinatura-claro.png" data-light="previews/assinatura-claro.png" data-dark="previews/assinatura-claro.png" loading="lazy" width="1280" height="720"></button><div class="card-info"><span class="count">06</span><h3>Assinatura</h3><p>Explore a interface de Assinatura.</p></div></article></div></section>
-<section class="disclaimer" id="sobre"><div class="wrap"><strong>Uma demonstração visual, não um servidor ativo.</strong><p>Esta página é estática e apresenta o projeto por imagens. Login, banco de dados e funcionalidades em Python/FastAPI não são executados no GitHub Pages. Para explorar o código e instalar a versão local, acesse o repositório.</p><a class="pill" href="https://github.com/tteukkkk/agendaflow-saas" target="_blank" rel="noopener noreferrer">Explorar o repositório ↗</a></div></section></main>
-<footer class="wrap footer"><strong>AgendaFlow — Matheus Macêdo</strong><span>Projeto demonstrativo de desenvolvimento de software</span><a href="https://tteukkkk.github.io/portfolio-matheus/">Voltar ao portfólio ↑</a></footer>
-<dialog id="viewer" aria-label="Captura de tela ampliada"><img id="enlarged" alt="" src="" width="1440" height="900"><div><strong id="view-name">Visualização</strong><button type="button" id="close">Fechar ✕</button></div></dialog>
-<script>
-(()=>{
-const root=document.documentElement,btn=document.getElementById('theme');
-const pics=[...document.querySelectorAll('img[data-light][data-dark]')],dialog=document.getElementById('viewer');
-function sync(){const dark=root.dataset.theme==='dark';pics.forEach(p=>{p.src=dark?p.dataset.dark:p.dataset.light});btn.textContent=dark?'☀':'☾';btn.setAttribute('aria-label',dark?'Ativar modo claro':'Ativar modo escuro')}
-btn.addEventListener('click',()=>{root.dataset.theme=root.dataset.theme==='dark'?'light':'dark';try{localStorage.setItem('pages-agendaflow-saas-theme',root.dataset.theme)}catch(e){}sync()});sync();
-document.querySelectorAll('.zoom').forEach(b=>b.addEventListener('click',()=>{const p=b.querySelector('img');document.getElementById('enlarged').src=p.src;document.getElementById('enlarged').alt=p.alt;document.getElementById('view-name').textContent=b.closest('.card').querySelector('h3').textContent;dialog.showModal()}));
-document.getElementById('close').addEventListener('click',()=>dialog.close());dialog.addEventListener('click',e=>{if(e.target===dialog)dialog.close()});
-})();
-</script></body></html>
+<html lang="pt-BR" data-product="agendaflow">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#f8f9fb">
+<title>AgendaFlow — Demonstração visual | Matheus Macêdo</title>
+<meta name="description" content="AgendaFlow: Um sistema multiempresa para acompanhar horários, serviços, clientes e a operação de cada dia. Conheça as telas, o código e os recursos do projeto.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+<script>try{document.documentElement.dataset.theme=localStorage.getItem('portfolio-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){document.documentElement.dataset.theme='light'}</script>
+<link rel="stylesheet" href="./site.css?v=2">
+<script defer src="./site.js?v=2"></script>
+</head>
+<body>
+<header class="masthead"><div class="wrap masthead-inner">
+  <a class="logo" href="#topo">AgendaFlow<b>.</b></a>
+  <nav class="header-links" aria-label="Navegação principal">
+    <a href="#telas">Todas as telas</a>
+    <a href="#sobre">Sobre</a>
+    <a href="https://tteukkkk.github.io/portfolio-matheus/">Portfólio</a>
+  </nav>
+  <div class="header-actions">
+    <button class="theme-toggle" type="button" id="theme-toggle" aria-label="Alternar modo claro e escuro">◐</button>
+    <a class="nav-cta" href="https://github.com/tteukkkk/agendaflow-saas" target="_blank" rel="noopener noreferrer">Código-fonte <span aria-hidden="true">↗</span></a>
+  </div>
+</div></header>
+<main id="topo">
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="wrap hero-inner">
+      <div class="hero-copy">
+        <div class="eyebrow">Agendamentos e serviços · projeto demonstrativo</div>
+        <h1 id="hero-title">AgendaFlow<span>.</span></h1>
+        <h2>Organize reservas, equipes e atendimentos.</h2>
+        <p>Um sistema multiempresa para acompanhar horários, serviços, clientes e a operação de cada dia.</p>
+        <div class="hero-actions">
+          <a class="button primary" href="#telas">Explorar todas as telas <span aria-hidden="true">↘</span></a>
+          <a class="button secondary" href="#sobre">Sobre o projeto <span aria-hidden="true">→</span></a>
+        </div>
+        <div class="pills"><span>Python</span><span>FastAPI</span><span>SQLAlchemy</span><span>JavaScript</span></div>
+      </div>
+      <div class="hero-media">
+        <div class="screen"><img src="previews/landing-claro.png" data-light="previews/landing-claro.png" data-dark="previews/landing-escuro.png" data-fallback-light="previews/landing-escuro.png" data-fallback-dark="previews/landing-claro.png" alt="Página inicial AgendaFlow" width="1440" height="900" loading="eager" decoding="async"></div>
+        <span class="media-label">DEMONSTRAÇÃO VISUAL</span>
+      </div>
+    </div>
+  </section>
+  <section id="telas" class="section wrap" aria-labelledby="screens-title">
+    <div class="section-heading">
+      <div><span class="section-eyebrow">INTERFACES · DESKTOP E MOBILE</span>
+      <h2 id="screens-title">Conheça o AgendaFlow<br>por dentro.</h2></div>
+      <p>Telas reais do projeto com dados fictícios. Alterne o tema para comparar o modo claro e o escuro e clique nas imagens para ampliar.</p>
+    </div>
+    <div class="filters" role="group" aria-label="Filtrar capturas">
+      <button class="filter" data-filter="all" type="button" aria-pressed="true">Todas as telas</button>
+      <button class="filter" data-filter="desktop" type="button" aria-pressed="false">Desktop</button>
+      <button class="filter" data-filter="mobile" type="button" aria-pressed="false">Mobile</button>
+      <span class="screen-badge"><span id="screen-count">14</span> telas</span>
+    </div>
+    <div class="screens"><article class="screen-card" data-kind="desktop">
+   <button class="screen-open" type="button" aria-label="Ampliar: Landing page">
+     <img src="previews/landing-claro.png" data-light="previews/landing-claro.png" data-dark="previews/landing-escuro.png" data-fallback-light="previews/landing-escuro.png" data-fallback-dark="previews/landing-claro.png" alt="Landing page — AgendaFlow" width="1440" height="900" loading="lazy" decoding="async"/>
+   </button>
+   <div class="screen-meta"><span class="number">TELA 01</span>
+    <h3>Landing page</h3><p>Apresentação da solução e serviços.</p>
+    <span class="screen-badge">Desktop</span></div>
+ </article>
+<article class="screen-card" data-kind="desktop">
+   <button class="screen-open" type="button" aria-label="Ampliar: Painel">
+     <img src="previews/painel-claro.png" data-light="previews/painel-claro.png" data-dark="previews/painel-escuro.png" data-fallback-light="previews/painel-escuro.png" data-fallback-dark="previews/painel-claro.png" alt="Painel — AgendaFlow" width="1440" height="900" loading="lazy" decoding="async"/>
+   </button>
+   <div class="screen-meta"><span class="number">TELA 02</span>
+    <h3>Painel</h3><p>Visão geral do negócio e dos agendamentos.</p>
+    <span class="screen-badge">Desktop</span></div>
+ </article>
+<article class="screen-card" data-kind="desktop">
+   <button class="screen-open" type="button" aria-label="Ampliar: Agenda">
+     <img src="previews/agenda-claro.png" data-light="previews/agenda-claro.png" data-dark="previews/agenda-escuro.png" data-fallback-light="previews/agenda-escuro.png" data-fallback-dark="previews/agenda-claro.png" alt="Agenda — AgendaFlow" width="1440" height="900" loading="lazy" decoding="async"/>
+   </button>
+   <div class="screen-meta"><span class="number">TELA 03</span>
+    <h3>Agenda</h3><p>Calendário e horários de atendimento.</p>
+    <span class="screen-badge">Desktop</span></div>
+ </article>
+<article class="screen-card" data-kind="desktop">
+   <button class="screen-open" type="button" aria-label="Ampliar: Reservas">
+     <img src="previews/reservar-claro.png" data-light="previews/reservar-claro.png" data-dark="previews/reservar-escuro.png" data-fallback-light="previews/reservar-escuro.png" data-fallback-dark="previews/reservar-claro.png" alt="Reservas — AgendaFlow" width="1440" height="900" loading="lazy" decoding="async"/>
+   </button>
+   <div class="screen-meta"><span class="number">TELA 04</span>
+    <h3>Reservas</h3><p>Fluxo de reserva de horários pelo cliente.</p>
+    <span class="screen-badge">Desktop</span></div>
+ </article>
+<article class="screen-card" data-kind="desktop">
+   <button class="screen-open" type="button" aria-label="Ampliar: Serviços">
+     <img src="previews/servicos-claro.png" data-light="previews/servicos-claro.png" data-dark="previews/servicos-escuro.png" data-fallback-light="previews/servicos-escuro.png" data-fallback-dark="previews/servicos-claro.png" alt="Serviços — AgendaFlow" width="1440" height="900" loading="lazy" decoding="async"/>
+   </button>
+   <div class="screen-meta"><span class="number">TELA 05</span>
+    <h3>Serviços</h3><p>Cadastro e organização dos serviços.</p>
+    <span class="screen-badge">Desktop</span></div>
+ </article>
+<article class="screen-card" data-kind="desktop">
+   <button class="screen-open" type="button" aria-label="Ampliar: Clientes">
+     <img src="previews/clientes-claro.png" data-light="previews/clientes-claro.png" data-dark="previews/clientes-escuro.png" data-fallback-light="previews/clientes-escuro.png" data-fallback-dark="previews/clientes-claro.png" alt="Clientes — AgendaFlow" width="1440" height="900" loading="lazy" decoding="async"/>
+   </button>
+   <div class="screen-meta"><span class="number">TELA 06</span>
+    <h3>Clientes</h3><p>Relacionamento e histórico de clientes.</p>
+    <span class="screen-badge">Desktop</span></div>
+ </article>
+<article class="screen-card" data-kind="desktop">
+   <button class="screen-open" type="button" aria-label="Ampliar: Equipe">
+     <img src="previews/equipe-claro.png" data-light="previews/equipe-claro.png" data-dark="previews/equipe-escuro.png" data-fallback-light="previews/equipe-escuro.png" data-fallback-dark="previews/equipe-claro.png" alt="Equipe — AgendaFlow" width="1440" height="900" loading="lazy" decoding="async"/>
+   </button>
+   <div class="screen-meta"><span class="number">TELA 07</span>
+    <h3>Equipe</h3><p>Gestão dos profissionais do negócio.</p>
+    <span class="screen-badge">Desktop</span></div>
+ </article>
+<article class="screen-card" data-kind="desktop">
+   <button class="screen-open" type="button" aria-label="Ampliar: Assinatura">
+     <img src="previews/assinatura-claro.png" data-light="previews/assinatura-claro.png" data-dark="previews/assinatura-escuro.png" data-fallback-light="previews/assinatura-escuro.png" data-fallback-dark="previews/assinatura-claro.png" alt="Assinatura — AgendaFlow" width="1440" height="900" loading="lazy" decoding="async"/>
+   </button>
+   <div class="screen-meta"><span class="number">TELA 08</span>
+    <h3>Assinatura</h3><p>Acompanhamento dos planos e assinaturas.</p>
+    <span class="screen-badge">Desktop</span></div>
+ </article>
+<article class="screen-card" data-kind="desktop">
+   <button class="screen-open" type="button" aria-label="Ampliar: Configurações">
+     <img src="previews/configuracoes-claro.png" data-light="previews/configuracoes-claro.png" data-dark="previews/configuracoes-escuro.png" data-fallback-light="previews/configuracoes-escuro.png" data-fallback-dark="previews/configuracoes-claro.png" alt="Configurações — AgendaFlow" width="1440" height="900" loading="lazy" decoding="async"/>
+   </button>
+   <div class="screen-meta"><span class="number">TELA 09</span>
+    <h3>Configurações</h3><p>Preferências e dados da organização.</p>
+    <span class="screen-badge">Desktop</span></div>
+ </article>
+<article class="screen-card" data-kind="desktop">
+   <button class="screen-open" type="button" aria-label="Ampliar: Login">
+     <img src="previews/login-claro.png" data-light="previews/login-claro.png" data-dark="previews/login-escuro.png" data-fallback-light="previews/login-escuro.png" data-fallback-dark="previews/login-claro.png" alt="Login — AgendaFlow" width="1440" height="900" loading="lazy" decoding="async"/>
+   </button>
+   <div class="screen-meta"><span class="number">TELA 10</span>
+    <h3>Login</h3><p>Autenticação e acesso ao sistema.</p>
+    <span class="screen-badge">Desktop</span></div>
+ </article>
+<article class="screen-card" data-kind="desktop">
+   <button class="screen-open" type="button" aria-label="Ampliar: Cadastro">
+     <img src="previews/cadastro-claro.png" data-light="previews/cadastro-claro.png" data-dark="previews/cadastro-escuro.png" data-fallback-light="previews/cadastro-escuro.png" data-fallback-dark="previews/cadastro-claro.png" alt="Cadastro — AgendaFlow" width="1440" height="900" loading="lazy" decoding="async"/>
+   </button>
+   <div class="screen-meta"><span class="number">TELA 11</span>
+    <h3>Cadastro</h3><p>Criação de conta no aplicativo.</p>
+    <span class="screen-badge">Desktop</span></div>
+ </article>
+<article class="screen-card" data-kind="mobile">
+   <button class="screen-open" type="button" aria-label="Ampliar: Landing mobile">
+     <img src="previews/landing-mobile.png" data-light="previews/landing-mobile.png" data-dark="previews/landing-mobile-escuro.png" data-fallback-light="previews/landing-mobile-escuro.png" data-fallback-dark="previews/landing-mobile.png" alt="Landing mobile — AgendaFlow" width="1440" height="900" loading="lazy" decoding="async"/>
+   </button>
+   <div class="screen-meta"><span class="number">TELA 12</span>
+    <h3>Landing mobile</h3><p>Apresentação adaptada para o celular.</p>
+    <span class="screen-badge">Mobile</span></div>
+ </article>
+<article class="screen-card" data-kind="mobile">
+   <button class="screen-open" type="button" aria-label="Ampliar: Reserva mobile">
+     <img src="previews/reserva-mobile.png" data-light="previews/reserva-mobile.png" data-dark="previews/reserva-mobile-escuro.png" data-fallback-light="previews/reserva-mobile-escuro.png" data-fallback-dark="previews/reserva-mobile.png" alt="Reserva mobile — AgendaFlow" width="1440" height="900" loading="lazy" decoding="async"/>
+   </button>
+   <div class="screen-meta"><span class="number">TELA 13</span>
+    <h3>Reserva mobile</h3><p>Agendamento pelo celular.</p>
+    <span class="screen-badge">Mobile</span></div>
+ </article>
+<article class="screen-card" data-kind="mobile">
+   <button class="screen-open" type="button" aria-label="Ampliar: Painel mobile">
+     <img src="previews/painel-mobile.png" data-light="previews/painel-mobile.png" data-dark="previews/painel-mobile-escuro.png" data-fallback-light="previews/painel-mobile-escuro.png" data-fallback-dark="previews/painel-mobile.png" alt="Painel mobile — AgendaFlow" width="1440" height="900" loading="lazy" decoding="async"/>
+   </button>
+   <div class="screen-meta"><span class="number">TELA 14</span>
+    <h3>Painel mobile</h3><p>Indicadores adaptados ao celular.</p>
+    <span class="screen-badge">Mobile</span></div>
+ </article></div>
+  </section>
+  <section id="sobre" class="about">
+    <div class="wrap about-inner">
+      <div><h2>Uma demonstração visual, não um servidor ativo.</h2>
+      <p>Esta publicação no GitHub Pages apresenta interfaces e recursos do projeto. O backend Python/FastAPI, o login e o banco de dados não funcionam nesta versão estática. Para executar a aplicação, consulte as instruções no repositório.</p></div>
+      <a class="about-link" href="https://github.com/tteukkkk/agendaflow-saas" target="_blank" rel="noopener noreferrer">Ver repositório ↗</a>
+    </div>
+  </section>
+</main>
+<footer class="footer wrap">
+  <strong>AgendaFlow · Matheus Macêdo</strong>
+  <span>Interface e desenvolvimento de software</span>
+  <a href="https://tteukkkk.github.io/portfolio-matheus/">Voltar ao portfólio ↑</a>
+</footer>
+<dialog id="lightbox" class="lightbox" aria-label="Visualizador de capturas">
+ <img id="full-image" alt="Captura ampliada" src="" width="1440" height="900">
+ <footer><strong id="lightbox-title">Captura de tela</strong><button id="lightbox-close" type="button">Fechar ✕</button></footer>
+</dialog>
+</body>
+</html>
