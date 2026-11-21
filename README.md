@@ -10,7 +10,7 @@
 ![JavaScript](https://img.shields.io/badge/JavaScript-Frontend-F7DF1E?logo=javascript&logoColor=black)
 ![Status](https://img.shields.io/badge/Status-Portf%C3%B3lio-555555)
 
-**[Perfil no GitHub](https://github.com/tteukkkk)** · **[Screenshots](#capturas-do-projeto)** · **[Como executar](#como-executar)**
+**[Perfil no GitHub](https://github.com/tteukkkk)** · **[Screenshots](#capturas-do-projeto)** · **[Como executar](#rodar-localmente)**
 
 <a href="previews/painel-claro.png"><img src="previews/painel-claro.png" alt="Interface de AgendaFlow SaaS" width="900" /></a>
 
@@ -26,26 +26,11 @@
 
 As demais telas (landing page, painel, relatórios, configurações e outras) estão em [`previews/`](previews/).
 
-## Como executar
-
-A seção técnica abaixo contém pré-requisitos, instalação, inicialização, testes e observações de segurança. Para uma instalação mais simples no Windows, consulte também as instruções de cada projeto.
-
----
-
+## Sobre o projeto
 
 **AgendaFlow** é uma aplicação de gestão de agendamentos projetada para ser oferecida como software por assinatura a estabelecimentos de serviços. É a evolução arquitetural da versão acadêmica v1: interfaces responsivas com temas claro/escuro, área administrativa autenticada, reserva pública e infraestrutura para planos e cobrança.
 
 > **Status:** versão candidata a piloto. Backend real, interface e testes automatizados; **não homologada para vendas em produção** até executar os itens de [Lançamento](docs/LANCAMENTO.md). Não use os logins fictícios em produção.
-
-## Prévia
-
-| Painel claro | Painel escuro |
-| --- | --- |
-| ![Painel claro](previews/painel-claro.png) | ![Painel escuro](previews/painel-escuro.png) |
-
-![Reserva online](previews/reservar-claro.png)
-
-Capturas geradas a partir do HTML renderizado pelo FastAPI e dados fictícios. São prévias reais da interface, não fotografias de uma implantação pública.
 
 ## O que está implementado
 
